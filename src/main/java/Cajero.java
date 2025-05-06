@@ -62,18 +62,24 @@ public class Cajero {
      * Reinicia el saldo a un valor inicial fijo (usado en pruebas).
      */
     public static void reiniciarSaldo() {
-        // TODO: Restablecer el valor del saldo a su valor original
+        saldo = 100000;
     }
 
-    private static boolean validarMontoPositivo(int monto){
-        return monto > 0;
+    public static void validarMontoPositivo(int monto){
+        if(monto <= 0){
+            throw new IllegalArgumentException("El monto debe ser mayor que cero.");
+        }
     }
 
-    private static boolean validarMultiplo1000 (int monto){
-        return monto % 1000 == 0;
+    public static void validarMultiplo1000 (int monto){
+        if(monto % 1000 != 0){
+            throw new IllegalArgumentException("El monto debe ser un multiplo de 1000.");
+        }
     }
 
-    private static boolean validarSaldoSuficiente(int monto){
-        return monto <= saldo;
+    public static void validarSaldoSuficiente(int monto){
+        if (monto > saldo){
+            throw new IllegalArgumentException("El monto no debe exceder saldo disponible.");
+        }
     }
 }
