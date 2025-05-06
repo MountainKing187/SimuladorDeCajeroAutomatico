@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cajero {
@@ -5,18 +6,17 @@ public class Cajero {
     private static int saldo = 100000;
     private static Scanner scanner = new Scanner(System.in);
 
+    public static void main(String[] args) {
+        menu();
+    }
     /**
      * Ejecuta el menú principal del programa y gestiona la interacción con el usuario.
      */
     public static void menu() {
         int opcion = 0;
         do{
-            try {
-                opcion = scanner.nextInt();
-            } catch (IllegalArgumentException iae){
-                opcion = 0;
-                System.out.println("Ingrese una opcion valida: ");
-            }
+            mostrarOpciones();
+            opcion = obtenerOpcion();
             ejecutarOpcion(opcion);
         }while (opcion != 4);
     }
@@ -50,15 +50,35 @@ public class Cajero {
                 if (monto != 0) depositar(monto);
             }
             case 4 -> System.out.println("Adios");
+            default -> System.out.println("Ingrese una opcion valida.");
         }
     }
 
-    public static int obtenerMonto(){
-        int monto = 0;
+    public static int obtenerOpcion() {
+        String scannerString;
+        int opcion;
+
+        System.out.println("Elija su opcion:");
+        scannerString = scanner.next();
         try {
-            System.out.println("Escriba el monto:");
-            monto = scanner.nextInt();
-        } catch (IllegalArgumentException iae){
+            opcion = Integer.parseInt(scannerString);
+        } catch (NumberFormatException nfe){
+            opcion = 0;
+            System.out.println("Ingreso un monto no valido");
+        }
+        return opcion;
+    }
+
+    public static int obtenerMonto(){
+        String scannerString;
+        int monto;
+
+        System.out.println("Escriba el monto:");
+        scannerString = scanner.next();
+        try {
+            monto = Integer.parseInt(scannerString);
+        } catch (NumberFormatException nfe){
+            monto = 0;
             System.out.println("Ingreso un monto no valido");
         }
 
