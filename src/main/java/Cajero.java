@@ -32,11 +32,15 @@ public class Cajero {
      * @param monto Monto a retirar.
      */
     public static void retirar(int monto) {
-        // TODO: Validar monto positivo
-        // TODO: Validar múltiplo de 1000
+        try {
+            validarMontoPositivo(monto);
+            validarMultiploMil(monto);
+            validarSaldoSuficiente(monto);
 
-        // TODO: Validar que el saldo sea suficiente
-        // TODO: Restar el monto del saldo si todo es válido
+            saldo -= monto;
+        } catch (IllegalArgumentException iae){
+            System.out.println("Error al retirar saldo: " + iae.getMessage());
+        }
     }
 
     /**
@@ -71,7 +75,7 @@ public class Cajero {
         }
     }
 
-    public static void validarMultiplo1000 (int monto){
+    public static void validarMultiploMil (int monto){
         if(monto % 1000 != 0){
             throw new IllegalArgumentException("El monto debe ser un multiplo de 1000.");
         }
