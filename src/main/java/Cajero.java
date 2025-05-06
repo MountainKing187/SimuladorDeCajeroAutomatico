@@ -39,7 +39,7 @@ public class Cajero {
 
             saldo -= monto;
         } catch (IllegalArgumentException iae){
-            System.out.println("Error al retirar saldo: " + iae.getMessage());
+            System.out.println("Error al retirar fondos: " + iae.getMessage());
         }
     }
 
@@ -48,9 +48,14 @@ public class Cajero {
      * @param monto Monto a depositar.
      */
     public static void depositar(int monto) {
-        // TODO: Validar monto positivo
-        // TODO: Validar múltiplo de 1000
-        // TODO: Sumar el monto al saldo si es válido
+        try {
+            validarMontoPositivo(monto);
+            validarMultiploMil(monto);
+
+            saldo += monto;
+        } catch (IllegalArgumentException iae){
+            System.out.println("Error al depositar fondos: " + iae.getMessage());
+        }
     }
 
     /**
@@ -58,8 +63,8 @@ public class Cajero {
      * @return Saldo actual.
      */
     public static int obtenerSaldo() {
-        // TODO: Retornar el valor actual del saldo
-        return 0;
+        System.out.println("Su saldo es de: $" + saldo + " Pesos");
+        return saldo;
     }
 
     /**
