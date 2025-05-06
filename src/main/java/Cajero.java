@@ -64,4 +64,16 @@ public class Cajero {
     public static void reiniciarSaldo() {
         // TODO: Restablecer el valor del saldo a su valor original
     }
+
+    private static boolean validarMontoPositivo(int monto){
+        return monto > 0;
+    }
+
+    private static boolean validarMultiplo1000 (int monto){
+        return monto % 1000 == 0;
+    }
+
+    private static boolean validarSaldoSuficiente(int monto){
+        return monto <= saldo;
+    }
 }
