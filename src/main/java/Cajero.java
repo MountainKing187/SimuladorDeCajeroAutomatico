@@ -9,14 +9,28 @@ public class Cajero {
      * Ejecuta el menú principal del programa y gestiona la interacción con el usuario.
      */
     public static void menu() {
-        // TODO: Implementar el código para gestionar la interacción con el usuario.
+        int opcion = 0;
+        do{
+            try {
+                opcion = scanner.nextInt();
+            } catch (IllegalArgumentException iae){
+                opcion = 0;
+                System.out.println("Ingrese una opcion valida: ");
+            }
+            ejecutarOpcion(opcion);
+        }while (opcion != 4);
     }
 
     /**
      * Muestra el menú principal con las opciones disponibles.
      */
     private static void mostrarOpciones() {
-        // TODO: Implementar el código para mostrar las opciones del menú en pantalla.
+        System.out.println("Simulador de Cajero");
+        System.out.println("===================");
+        System.out.println("1) Ver Saldo");
+        System.out.println("2) Retirar Fondos");
+        System.out.println("3) Depositar Fondos");
+        System.out.println("4) Salir");
     }
 
     /**
@@ -24,7 +38,31 @@ public class Cajero {
      * @param opcion Opción ingresada por el usuario.
      */
     private static void ejecutarOpcion(int opcion) {
-        // TODO: Implementar la lógica para ejecutar la opción seleccionada.
+        int monto;
+        switch (opcion){
+            case 1 -> obtenerSaldo();
+            case 2 -> {
+                monto = obtenerMonto();
+                if (monto != 0) retirar(monto);
+            }
+            case 3 -> {
+                monto = obtenerMonto();
+                if (monto != 0) depositar(monto);
+            }
+            case 4 -> System.out.println("Adios");
+        }
+    }
+
+    public static int obtenerMonto(){
+        int monto = 0;
+        try {
+            System.out.println("Escriba el monto:");
+            monto = scanner.nextInt();
+        } catch (IllegalArgumentException iae){
+            System.out.println("Ingreso un monto no valido");
+        }
+
+        return monto;
     }
 
     /**
